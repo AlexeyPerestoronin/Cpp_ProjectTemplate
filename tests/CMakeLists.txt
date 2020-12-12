@@ -10,7 +10,7 @@ add_subdirectory(./googletest)
 include_directories("${gtest_SOURCE_DIR}/include")
 # GoogleTest: END.
 
-include_directories(../include)
+include_directories(../src)
 
 file(GLOB TEST_LIB_CPP_FILES "../src/*.cpp")
 file(GLOB TEST_LIB_HPP_FILES "../src/*.hpp")

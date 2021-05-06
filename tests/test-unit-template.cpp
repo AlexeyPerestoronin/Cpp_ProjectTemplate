@@ -1,10 +1,7 @@
 #include <gtest/gtest.h>
 
-TEST(SomeTest, TestTest) {
-    ASSERT_TRUE(false);
-}
+#include "default.hpp"
 
-int main(int argc, char *argv[]) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+TEST(SomeTest, TestTest) {
+    ASSERT_EQ(twice(5), 10);
 }

@@ -12,5 +12,12 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
 endif()
 
-add_subdirectory(./src)
+include_directories(./)
+
+file(GLOB HPP_FILES "./*.hpp")
+file(GLOB CPP_FILES "./*.cpp")
+
+add_library(${LIB_NAME} STATIC ${CPP_FILES} ${HPP_FILES})
+target_compile_features(${LIB_NAME} PRIVATE ${PROJECT_CPP_STANDART})
+
 add_subdirectory(./tests)

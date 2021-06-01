@@ -1,5 +1,5 @@
 #include "default.hpp"
 
 int twice(int i) {
-    return i*2;
+    return i * 2;
 }

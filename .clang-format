@@ -48,6 +48,7 @@ BreakConstructorInitializers: BeforeComma
 BreakConstructorInitializersBeforeComma: false
 BreakAfterJavaFieldAnnotations: true
 BreakStringLiterals: false
+BreakInheritanceList: BeforeComma
 
 ColumnLimit: 160
 

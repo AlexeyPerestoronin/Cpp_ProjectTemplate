@@ -8,7 +8,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # include specific functions
-include("${CMAKE_SOURCE_DIR}/SpecificFunc.cmake")
+include("${CMAKE_SOURCE_DIR}/CMakeFuncs.cmake")
 
 # set global variables
 set(PROJECT_CPP_STANDART "cxx_std_17")

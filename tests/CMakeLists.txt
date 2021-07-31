@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1.0)
 
 # include specific functions
-include("${CMAKE_CURRENT_SOURCE_DIR}/CMakeFunc.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/CMakeFuncs.cmake")
 
 # set global variables
 set(UNIT_TESTS_EXE_NAME ${LIB_NAME}-unit-tests)

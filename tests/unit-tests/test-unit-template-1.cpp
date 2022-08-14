@@ -1,6 +1,6 @@
 #include "tests/test-common.hpp"
 
-#include "default.hpp"
+#include "src/default.hpp"
 
 
 TEST(SomeTest1, TestTest) {

@@ -8,7 +8,7 @@ function(AddBoost)
     FetchContent_Declare(
         build_boost
         GIT_REPOSITORY https://github.com/boostorg/boost.git
-        GIT_TAG boost-1.77.0.beta1
+        GIT_TAG boost-1.80.0
         GIT_PROGRESS true
     )
 

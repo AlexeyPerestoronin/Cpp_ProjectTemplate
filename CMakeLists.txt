@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.1.0)
 
+# it allows using of folder-filters in VS-solution
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 # set build type
 if (CMAKE_BUILD_TYPE STREQUAL "Release")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
@@ -8,11 +11,12 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # include specific functions
-include("${CMAKE_SOURCE_DIR}/FindAllSourceFiles.cmake")
+include("${CMAKE_SOURCE_DIR}/AddBoost.cmake")
 include("${CMAKE_SOURCE_DIR}/ComposeFileBySourceGroup.cmake")
+include("${CMAKE_SOURCE_DIR}/FindAllSourceFiles.cmake")
 
 # set global variables
-set(PROJECT_CPP_STANDART "cxx_std_17")
+set(CMAKE_CXX_STANDARD 17)
 set(PROJECT_NAME "TemplateProject")
 set(LIB_NAME "TemplateProjectLib")
 
@@ -35,6 +39,9 @@ ComposeFileBySourceGroup("${CMAKE_CURRENT_SOURCE_DIR}" "${listTargetSourceFiles}
 # create library
 add_library(${LIB_NAME} STATIC "${listTargetSourceFiles}")
 target_compile_features(${LIB_NAME} PRIVATE ${PROJECT_CPP_STANDART})
+
+# add boost-libraty insice project
+AddBoost()
 
 # add tests
 add_subdirectory(./tests)

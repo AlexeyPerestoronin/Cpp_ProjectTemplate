@@ -4,6 +4,8 @@ include("${CMAKE_SOURCE_DIR}/ComposeFileBySourceGroup.cmake")
 # brief: creates suit tests
 # note1: one suit test is creates from one code file and presents as unique project
 function(AddSuitTests)
+    message("[AddSuitTests] begin")
+
     # find all source files for suit-tests
     set(listAvalibleFilesTemplates "test-suit.+\\.h" "test-suit.+\\.hpp" "test-suit-.+\\.cpp")
     FindAllSourceFiles("Find all files for suit-tests" "${CMAKE_CURRENT_SOURCE_DIR}" "" "${listAvalibleFilesTemplates}" listTargetSourceSuitTestsFiles)
@@ -27,4 +29,6 @@ function(AddSuitTests)
         target_link_libraries(${suitTestExeName} ${LIB_NAME})
         set_target_properties(${suitTestExeName} PROPERTIES FOLDER "Tests")
     endforeach()
+
+    message("[AddSuitTests] end")
 endfunction(AddSuitTests)

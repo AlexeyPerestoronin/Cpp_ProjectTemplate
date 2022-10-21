@@ -15,9 +15,14 @@ project(${UNIT_TESTS_EXE_NAME} NONE)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/")
 include_directories("${CMAKE_SOURCE_DIR}/")
 
-# add google-test framework inside project
-AddGoogleTests()
-# add unit tests
-AddUnitTests()
-# add suit tests
-AddSuitTests()
+if(MYLIB_BUILD_UNIT_TESTS OR MYLIB_BUILD_SUIT_TESTS)
+    AddGoogleTests()
+endif()
+
+if(MYLIB_BUILD_UNIT_TESTS)
+    AddUnitTests()
+endif()
+
+if(MYLIB_BUILD_SUIT_TESTS)
+    AddSuitTests()
+endif()

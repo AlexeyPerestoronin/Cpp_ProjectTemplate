@@ -1,3 +1,5 @@
 #pragma once
 
-int twice(int i);
+#include "export.hpp"
+
+CPPPROJECTTEMPLATELIB_EXPORT int twice(int i);

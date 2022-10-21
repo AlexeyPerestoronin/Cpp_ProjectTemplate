@@ -4,6 +4,8 @@ include(FetchContent)
 
 # brief: add Google tests to current project
 function(AddGoogleTests)
+    message("[AddGoogleTests] begin")
+
     FetchContent_Declare(
         googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
@@ -20,4 +22,6 @@ function(AddGoogleTests)
     set_target_properties(gmock_main PROPERTIES FOLDER "External/GTests")
     set_target_properties(gtest PROPERTIES FOLDER "External/GTests")
     set_target_properties(gtest_main PROPERTIES FOLDER "External/GTests")
+
+    message("[AddGoogleTests] end")
 endfunction(AddGoogleTests)

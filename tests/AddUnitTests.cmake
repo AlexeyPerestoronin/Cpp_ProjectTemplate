@@ -3,6 +3,8 @@ include("${CMAKE_SOURCE_DIR}/ComposeFileBySourceGroup.cmake")
 
 # brief: creates unit tests as one test project
 function(AddUnitTests)
+    message("[AddUnitTests] begin")
+
     # find all source files for unit-tests
     set(listAvalibleFilesTemplates "test-unit.+\\.h" "test-unit.+\\.hpp" "test-unit-.+\\.cpp")
     FindAllSourceFiles("Find all files for unit-tests" "${CMAKE_CURRENT_SOURCE_DIR}" "" "${listAvalibleFilesTemplates}" listTargetSourceUnitTestsFiles)
@@ -23,4 +25,6 @@ function(AddUnitTests)
     target_link_libraries(${unitTestsExeName} Boost::coroutine)
     target_link_libraries(${unitTestsExeName} ${LIB_NAME})
     set_target_properties(${unitTestsExeName} PROPERTIES FOLDER "Tests")
+
+    message("[AddUnitTests] end")
 endfunction(AddUnitTests)

@@ -4,6 +4,8 @@ include(FetchContent)
 
 # brief: add Boost to current project
 function(AddBoost)
+    message("[AddBoost] begin")
+
     set(BOOST_ENABLE_CMAKE ON)
     FetchContent_Declare(
         build_boost
@@ -45,4 +47,8 @@ function(AddBoost)
     set_target_properties(boost_unit_test_framework PROPERTIES FOLDER "External/Boost")
     set_target_properties(boost_wave PROPERTIES FOLDER "External/Boost")
     set_target_properties(boost_wserialization PROPERTIES FOLDER "External/Boost")
+    set_target_properties(boost_log PROPERTIES FOLDER "External/Boost")
+    set_target_properties(boost_log_setup PROPERTIES FOLDER "External/Boost")
+
+    message("[AddBoost] end")
 endfunction(AddBoost)

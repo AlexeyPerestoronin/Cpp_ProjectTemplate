@@ -2,6 +2,5 @@
 **/*.log
 
 # forbidden catalogs
-tests/googletest/
 build/
 libs/

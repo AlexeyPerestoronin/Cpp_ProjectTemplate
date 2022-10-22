@@ -6,25 +6,17 @@ function(AddUnitTests)
     message("[AddUnitTests] begin")
 
     # find all source files for unit-tests
-    set(listAvalibleFilesTemplates "test-unit.+\\.h" "test-unit.+\\.hpp" "test-unit-.+\\.cpp")
-    FindAllSourceFiles("Find all files for unit-tests" "${CMAKE_CURRENT_SOURCE_DIR}" "" "${listAvalibleFilesTemplates}" listTargetSourceUnitTestsFiles)
+    set(listAvalibleFilesTemplates ".+\\.h" ".+\\.hpp" ".+\\.cpp")
+    FindAllSourceFiles("Find all files for unit-tests" "${CMAKE_CURRENT_SOURCE_DIR}/unit-tests" "" "${listAvalibleFilesTemplates}" listTargetSourceUnitTestsFiles)
+    ComposeFileBySourceGroup("${CMAKE_CURRENT_SOURCE_DIR}/unit-tests" "${listTargetSourceUnitTestsFiles}")
 
-    # find all base files for tests
-    set(listAvalibleFilesTemplates "test-common.hpp" "test-main.cpp")
-    FindAllSourceFiles("Find base files for tests" "${CMAKE_CURRENT_SOURCE_DIR}" "" "${listAvalibleFilesTemplates}" listTargetTestsFiles)
-
-    # compose all founded files by directory
-    ComposeFileBySourceGroup("${CMAKE_CURRENT_SOURCE_DIR}" "${listTargetSourceUnitTestsFiles}")
-    ComposeFileBySourceGroup("${CMAKE_CURRENT_SOURCE_DIR}" "${listTargetTestsFiles}")
-
-    set(unitTestsExeName ${LIB_NAME}-unit-tests)
-    add_executable(${unitTestsExeName} ${listTargetSourceUnitTestsFiles} ${listTargetTestsFiles})
-    target_compile_features(${unitTestsExeName} PRIVATE ${PROJECT_CPP_STANDART})
+    set(unitTestsExeName ${TASKS_LIB_NAME}-unit-tests)
+    add_executable(${unitTestsExeName} ${listTargetSourceUnitTestsFiles} "test-main.cpp")
+    set_property(TARGET ${unitTestsExeName} PROPERTY CXX_STANDARD ${TASKS_LIB_CXX_STANDART})
     target_link_libraries(${unitTestsExeName} GTest::gtest_main)
     target_link_libraries(${unitTestsExeName} GTest::gmock_main)
-    target_link_libraries(${unitTestsExeName} Boost::coroutine)
-    target_link_libraries(${unitTestsExeName} ${LIB_NAME})
-    set_target_properties(${unitTestsExeName} PROPERTIES FOLDER "Tests")
+    target_link_libraries(${unitTestsExeName} ${TASKS_LIB_NAME})
+    set_target_properties(${unitTestsExeName} PROPERTIES FOLDER "Tests/UnitTests")
 
     message("[AddUnitTests] end")
 endfunction(AddUnitTests)

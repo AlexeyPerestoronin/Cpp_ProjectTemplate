@@ -1,33 +1,41 @@
 include("${CMAKE_SOURCE_DIR}/FindAllSourceFiles.cmake")
 include("${CMAKE_SOURCE_DIR}/ComposeFileBySourceGroup.cmake")
 
+
+# brief: creates suit tests
+# param: i_targetTestFile - target file for new suit-test
+function(AddSuitTest i_targetTestFile)
+    message("[add suit-test: ${i_targetTestFile}] begin")
+    
+    # place the suit-tests in target VS-filter
+    get_filename_component(fileDir "${i_targetTestFile}" DIRECTORY)
+    string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/suit-tests/" "" suitTestGroupe "${fileDir}")
+    string(REPLACE "/" "-" suitTestPrefix "${suitTestGroupe}")
+
+    get_filename_component(fileName ${i_targetTestFile} NAME_WE)
+    set(suitTestExeName ${suitTestPrefix}-${fileName})
+    add_executable(${suitTestExeName} ${i_targetTestFile} "test-main.cpp")
+    set_property(TARGET ${suitTestExeName} PROPERTY CXX_STANDARD ${TASKS_LIB_CXX_STANDART})
+    target_link_libraries(${suitTestExeName} GTest::gtest_main)
+    target_link_libraries(${suitTestExeName} GTest::gmock_main)
+    target_link_libraries(${suitTestExeName} ${TASKS_LIB_NAME})
+    
+    set_target_properties(${suitTestExeName} PROPERTIES FOLDER "Tests/SuitTests/${suitTestGroupe}")
+    
+    message("[add suit-test: ${i_targetTestFile}] end")
+endfunction(AddSuitTest)
+
+
 # brief: creates suit tests
 # note1: one suit test is creates from one code file and presents as unique project
 function(AddSuitTests)
     message("[AddSuitTests] begin")
 
-    # find all source files for suit-tests
-    set(listAvalibleFilesTemplates "test-suit.+\\.h" "test-suit.+\\.hpp" "test-suit-.+\\.cpp")
-    FindAllSourceFiles("Find all files for suit-tests" "${CMAKE_CURRENT_SOURCE_DIR}" "" "${listAvalibleFilesTemplates}" listTargetSourceSuitTestsFiles)
-
-    # find all base files for tests
-    set(listAvalibleFilesTemplates "test-common.hpp" "test-main.cpp")
-    FindAllSourceFiles("Find base files for tests" "${CMAKE_CURRENT_SOURCE_DIR}" "" "${listAvalibleFilesTemplates}" listTargetTestsFiles)
-
-    # compose all founded files by directory
-    ComposeFileBySourceGroup("${CMAKE_CURRENT_SOURCE_DIR}" "${listTargetSourceSuitTestsFiles}")
-    ComposeFileBySourceGroup("${CMAKE_CURRENT_SOURCE_DIR}" "${listTargetTestsFiles}")
-
-    foreach(oneSuitTestFile ${listTargetSourceSuitTestsFiles})
-        get_filename_component(suitTestFileName ${oneSuitTestFile} NAME_WE)
-        set(suitTestExeName ${LIB_NAME}-${suitTestFileName})
-        add_executable(${suitTestExeName} ${oneSuitTestFile} ${listTargetTestsFiles})
-        target_compile_features(${suitTestExeName} PRIVATE ${PROJECT_CPP_STANDART})
-        target_link_libraries(${suitTestExeName} GTest::gtest_main)
-        target_link_libraries(${suitTestExeName} GTest::gmock_main)
-        target_link_libraries(${suitTestExeName} Boost::coroutine)
-        target_link_libraries(${suitTestExeName} ${LIB_NAME})
-        set_target_properties(${suitTestExeName} PROPERTIES FOLDER "Tests")
+    file(GLOB_RECURSE sources_list "${CMAKE_CURRENT_SOURCE_DIR}/suit-tests/*")
+    foreach(source ${sources_list})
+        if(NOT IS_DIRECTORY ${source})
+            AddSuitTest(${source})
+        endif()
     endforeach()
 
     message("[AddSuitTests] end")

@@ -2,6 +2,6 @@
 
 #include <gtest/gtest.h>
 
-TEST(SomeTest, TestTest3) {
+TEST(TwiceTest, Test2) {
     ASSERT_EQ(twice(5), 10);
 }

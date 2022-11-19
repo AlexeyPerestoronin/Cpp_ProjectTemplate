@@ -11,12 +11,23 @@ function(AddUnitTests)
     ComposeFileBySourceGroup("${CMAKE_CURRENT_SOURCE_DIR}/unit-tests" "${listTargetSourceUnitTestsFiles}")
 
     set(unitTestsExeName ${TASKS_LIB_NAME}-unit-tests)
+    
     add_executable(${unitTestsExeName} ${listTargetSourceUnitTestsFiles} "test-main.cpp")
-    set_property(TARGET ${unitTestsExeName} PROPERTY CXX_STANDARD ${TASKS_LIB_CXX_STANDART})
-    target_link_libraries(${unitTestsExeName} GTest::gtest_main)
-    target_link_libraries(${unitTestsExeName} GTest::gmock_main)
-    target_link_libraries(${unitTestsExeName} ${TASKS_LIB_NAME})
-    set_target_properties(${unitTestsExeName} PROPERTIES FOLDER "Tests/UnitTests")
+    
+    target_link_libraries(${unitTestsExeName}
+        GTest::gtest_main
+        GTest::gmock_main
+        ${TASKS_LIB_NAME}
+    )
+
+    set_target_properties(${unitTestsExeName} PROPERTIES
+        # choose C++ language
+        LINKER_LANGUAGE CXX
+        # choose target C++ standart
+        CXX_STANDARD ${TASKS_LIB_CXX_STANDART}
+        # define the filter in VS-solution
+        FOLDER "Tests/UnitTests"
+    )
 
     message("[AddUnitTests] end")
 endfunction(AddUnitTests)

@@ -13,14 +13,25 @@ function(AddSuitTest i_targetTestFile)
     string(REPLACE "/" "-" suitTestPrefix "${suitTestGroupe}")
 
     get_filename_component(fileName ${i_targetTestFile} NAME_WE)
-    set(suitTestExeName ${suitTestPrefix}-${fileName})
-    add_executable(${suitTestExeName} ${i_targetTestFile} "test-main.cpp")
-    set_property(TARGET ${suitTestExeName} PROPERTY CXX_STANDARD ${TASKS_LIB_CXX_STANDART})
-    target_link_libraries(${suitTestExeName} GTest::gtest_main)
-    target_link_libraries(${suitTestExeName} GTest::gmock_main)
-    target_link_libraries(${suitTestExeName} ${TASKS_LIB_NAME})
     
-    set_target_properties(${suitTestExeName} PROPERTIES FOLDER "Tests/SuitTests/${suitTestGroupe}")
+    set(suitTestExeName ${suitTestPrefix}-${fileName})
+    
+    add_executable(${suitTestExeName} ${i_targetTestFile} "test-main.cpp")
+    
+    target_link_libraries(${suitTestExeName}
+        GTest::gtest_main
+        GTest::gmock_main
+        ${TASKS_LIB_NAME}
+    )
+    
+    set_target_properties(${suitTestExeName} PROPERTIES
+        # choose C++ language
+        LINKER_LANGUAGE CXX
+        # choose target C++ standart
+        CXX_STANDARD ${TASKS_LIB_CXX_STANDART}
+        # define the filter in VS-solution
+        FOLDER "Tests/SuitTests/${suitTestGroupe}"
+    )
     
     message("[add suit-test: ${i_targetTestFile}] end")
 endfunction(AddSuitTest)

@@ -1,7 +1,5 @@
 #include "tests/test-common.hpp"
 
-#include "src/default.hpp"
-
 // #include <boost/coroutine/coroutine.hpp>
 
 TEST(CorutineTesting, Test1) {

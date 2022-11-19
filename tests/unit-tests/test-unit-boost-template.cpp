@@ -1,4 +1,4 @@
-#include "tests/test-common.hpp"
+#include <gtest/gtest.h>
 
 // #include <boost/coroutine/coroutine.hpp>
 

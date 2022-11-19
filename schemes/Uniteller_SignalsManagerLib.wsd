@@ -1,0 +1,15 @@
+@startuml TaskLib scheme
+skinparam titleBorderRoundCorner 15
+skinparam titleBorderThickness 2
+skinparam titleBorderColor red
+skinparam titleBackgroundColor Aqua-CadetBlue
+title TaskLib scheme
+
+allow_mixing
+
+package "Scheme of the Task Library" as Uniteller_SignalsManagerLib <<Node>> #DDDDDD {
+    package TaskLib_NS #FFFFFF {
+        ' TODO: add here some of the librarie's schemes
+    }
+}
+@enduml

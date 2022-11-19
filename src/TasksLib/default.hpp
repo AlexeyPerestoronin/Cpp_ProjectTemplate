@@ -2,4 +2,4 @@
 
 #include "export.hpp"
 
-TASKSLIB_EXPORT int twice(int i);
+int twice(int i);

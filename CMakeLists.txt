@@ -15,19 +15,19 @@ set(TASKS_LIB_NAME "${PROJECT_NAME}Lib")
 # choose target c++ standart
 set(TASKS_LIB_CXX_STANDART 17)
 
-# choose staic or shared build option or allow to set by default
+# choose static or shared build option or allow to set by default
 # MYLIB_SHARED_LIBS option (undefined by default) can be used to force shared/static build
 
 # choose should the general-target-lib be built
 option(TASKS_LIB_BUILD_TARGET_LIB "Build target lib" ON)
 
-# choose should the unit-tests be compilled together
+# choose should the unit-tests be compiled together
 option(TASKS_LIB_BUILD_UNIT_TESTS "Build unit-tests" ON)
 
-# choose should the suit-tests be compilled together
+# choose should the suit-tests be compiled together
 option(TASKS_LIB_BUILD_SUIT_TESTS "Build suit-tests" ON)
 
-# choose should the boost-library be compilled together
+# choose should the boost-library be compiled together
 option(TASKS_LIB_BUILD_WITH_BOOST "Build with Boost" OFF)
 
 #----------------------------------------------------------------------------------------------------------------------
